@@ -24,7 +24,7 @@
 		
 		
 		
-		<security:intercept-url pattern="/bidders" method="POST" access="authenticated" requires-channel="https"/>
+		<security:intercept-url pattern="/**" access="authenticated"/>
 
 	</security:http>
 </beans>
