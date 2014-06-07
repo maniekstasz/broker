@@ -1,0 +1,17 @@
+<form novalidate class="form-horizontal">
+	<div data-st-form-elem data-st-label="Username">
+		<input type="text" data-ng-model="user.content.credentials.username" />
+	</div>
+	<div data-st-form-elem data-st-label="Email">
+		<input type="email" data-ng-model="user.content.credentials.mail" />
+	</div>
+	<div data-st-form-elem data-st-label="Password">
+		<input type="password"
+				data-ng-model="user.content.credentials.password" />
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button class="btn btn-success" data-ng-click="submit()">Save</button>
+		</div>
+	</div>
+</form>

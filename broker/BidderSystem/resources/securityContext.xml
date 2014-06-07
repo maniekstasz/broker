@@ -8,20 +8,21 @@
 
 
 
-
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
 			ref="authenticationProvider" />
 	</security:authentication-manager>
 
 	<security:http use-expressions="true" create-session="stateless">
-		<security:anonymous enabled="false" />
+		<security:anonymous enabled="true" />
 		<security:http-basic />
-		<security:intercept-url pattern="/invoice" method="POST" requires-channel="https"
-			access="authenticated" />
-
-<!-- 		<security:intercept-url pattern="/**" access="authenticated" /> -->
-
+		
+		<security:intercept-url pattern="/api/users" method="POST" access="permitAll()" requires-channel="https"/>
+		<security:intercept-url pattern="/app/**" method="GET" access="permitAll()" requires-channel="https"/>
+		<security:intercept-url pattern="/resources/**" method="GET" access="permitAll()" requires-channel="https"/>
+		<security:intercept-url pattern="/" method="GET" access="permitAll()" requires-channel="https"/>
+		
+		<security:intercept-url pattern="/**" access="authenticated" requires-channel="https"/>
 
 	</security:http>
 </beans>

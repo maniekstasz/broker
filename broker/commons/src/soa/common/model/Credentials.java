@@ -8,6 +8,9 @@ import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Embeddable
 public class Credentials implements Serializable {
 	/**
@@ -27,10 +30,12 @@ public class Credentials implements Serializable {
 	@NotNull
 	private String username;
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
-
+	
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}

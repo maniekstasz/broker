@@ -1,0 +1,9 @@
+	<div data-ng-repeat="user in list.content">
+		<div>Username: {{user.content.credentials.username}}</div>
+		<div>Email: {{user.content.credentials.mail}}</div>
+		<br/>
+	</div>
+
+<pagination direction-links="true" total-items="list.page.totalElements"
+		page="adsList.page.number" num-pages="list.page.totalPages" max-size="5"
+		items-per-page="10" on-select-page="selectPage(page)"></pagination>

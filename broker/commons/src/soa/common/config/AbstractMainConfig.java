@@ -26,8 +26,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import soa.common.controller.IndexController;
 import soa.common.security.Auditor;
 import soa.common.security.AuthenticationProvider;
 import soa.common.security.SecurityEventHandlerSupportBean;
@@ -127,7 +130,7 @@ public abstract class AbstractMainConfig extends WebMvcConfigurerAdapter {
 	public SecurityEventHandlerSupportBean securityEventHandlerSupportBean() {
 		return new SecurityEventHandlerSupportBean();
 	}
-	
+
 	@Bean
 	public JavaMailSender javamailSender() {
 		JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
@@ -144,6 +147,25 @@ public abstract class AbstractMainConfig extends WebMvcConfigurerAdapter {
 		return javaMailSenderImpl;
 	}
 
+	@Bean
+	public InternalResourceViewResolver setupViewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/");
+		resolver.setSuffix(".jsp");
+
+		return resolver;
+	}
+
+	@Bean
+	public IndexController indexController() {
+		return new IndexController();
+	}
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/app/**").addResourceLocations("/app/**");
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/**");
+	}
 
 	// @Bean
 	// public ObjectMapper objectMapper() {

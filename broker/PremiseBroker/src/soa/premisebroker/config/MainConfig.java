@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import soa.common.config.AbstractMainConfig;
 import soa.common.security.AuthenticationProvider;
@@ -38,6 +39,7 @@ public class MainConfig extends AbstractMainConfig {
 	public Invoicer invoicer() {
 		return new Invoicer();
 	}
+	
 
 
 }
