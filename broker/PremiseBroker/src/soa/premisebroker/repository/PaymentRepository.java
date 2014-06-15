@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import soa.premisebroker.model.Payment;
 
-@RepositoryRestResource
+@RepositoryRestResource(exported=false)
 public interface PaymentRepository extends CrudRepository<Payment, Long>  {
 
 }

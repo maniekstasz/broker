@@ -1,12 +1,7 @@
 package soa.common.config;
 
-import java.security.cert.X509Certificate;
 import java.util.Properties;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import javax.security.cert.CertificateException;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -24,18 +19,18 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.tempuri.BankLocator;
 
+import soa.common.controller.Controller;
 import soa.common.controller.IndexController;
-import soa.common.security.Auditor;
 import soa.common.security.AuthenticationProvider;
+import soa.common.security.CustomAuthenticationEntryPoint;
 import soa.common.security.SecurityEventHandlerSupportBean;
 
-//import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 
 @Configuration
 @EnableWebMvc
@@ -45,6 +40,12 @@ public abstract class AbstractMainConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	private Environment env;
+	
+	
+	@Bean
+	public CustomAuthenticationEntryPoint  customAuthenticationEntryPoint(){
+		return new CustomAuthenticationEntryPoint();
+	}
 
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
@@ -85,36 +86,8 @@ public abstract class AbstractMainConfig extends WebMvcConfigurerAdapter {
 		return transactionManager;
 	}
 
-	@Bean
-	public RestTemplate restTemplate() {
-		try {
-			SSLContext ctx = SSLContext.getInstance("TLS");
-			X509TrustManager tm = new X509TrustManager() {
 
-				public void checkClientTrusted(X509Certificate[] xcs,
-						String string) {
-				}
 
-				public void checkServerTrusted(X509Certificate[] xcs,
-						String string) {
-				}
-
-				public X509Certificate[] getAcceptedIssuers() {
-					return null;
-				}
-			};
-			ctx.init(null, new TrustManager[] { tm }, null);
-			SSLContext.setDefault(ctx);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return new RestTemplate();
-	}
-
-	@Bean
-	public Auditor auditor() {
-		return new Auditor();
-	}
 
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
@@ -161,30 +134,21 @@ public abstract class AbstractMainConfig extends WebMvcConfigurerAdapter {
 		return new IndexController();
 	}
 	
+	@Bean
+	public Controller controller(){
+		return new Controller();
+	}
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/app/**").addResourceLocations("/app/**");
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/**");
 	}
+	
+	@Bean
+	public BankLocator bankLocator(){
+		return new BankLocator();
+	}
 
-	// @Bean
-	// public ObjectMapper objectMapper() {
-	// ObjectMapper objectMapper = new ObjectMapper();
-	// objectMapper
-	// .registerModule(new Hibernate4Module()
-	// .configure(
-	// com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS,
-	// true));
-	// return objectMapper;
-	// }
-	//
-	// @Override
-	// public void configureMessageConverters(
-	// List<HttpMessageConverter<?>> converters) {
-	// MappingJackson2HttpMessageConverter jacksonConverter = new
-	// MappingJackson2HttpMessageConverter();
-	// jacksonConverter.setObjectMapper(objectMapper());
-	// converters.add(jacksonConverter);
-	// }
 
 }

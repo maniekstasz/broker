@@ -20,15 +20,18 @@ import soa.premisebroker.model.BidderWebHook.WebHooType;
 public interface BidderRepository extends
 		PagingAndSortingRepository<Bidder, Long>, BidderRepositoryCustom {
 
+	@RestResource(exported = false)
 	@Query("select webHook from BidderWebHook webHook left join webHook.bidder bidder where bidder.id = :bidderId and webHook.type=:type")
 	public BidderWebHook getBidderWebHook(@Param("bidderId") Long bidderId,
 			@Param("type") WebHooType type);
 
+	@RestResource(exported = false)
 	@Query("select offer.bidder from PremiseReservation reservation left join reservation.premise premise left join premise.offer offer where reservation.createdDate > :date and reservation.status = :status")
 	public List<Bidder> getBiddersForReservationApproval(
 			@Param("date") @Temporal Date date,
 			@Param("status") ReservationStatus status);
 
+	@RestResource(exported = false)
 	@Query("select bidder from Bidder bidder left join bidder.createdBy cb where cb.id = :createdById")
 	public Bidder findByCreatedById(@Param("createdById") Long createdById);
 }

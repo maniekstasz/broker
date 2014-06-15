@@ -38,6 +38,9 @@ public class Payment extends AbstractPersistable<Long> {
 	@CreatedDate
 	@Column(name="created_date", nullable=false)
 	private Date createdDate;
+	
+	
+	private Double amount;
 
 	public PaymentType getPaymentType() {
 		return paymentType;
@@ -69,6 +72,19 @@ public class Payment extends AbstractPersistable<Long> {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+	
+	public Long getBillId(){
+		int index = title.lastIndexOf("id: ");
+		return new Long(title.substring(index + 4));
 	}
 
 }

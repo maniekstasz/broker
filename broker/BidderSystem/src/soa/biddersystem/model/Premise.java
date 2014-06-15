@@ -7,6 +7,9 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 import soa.common.model.AbstractPremise;
 
@@ -20,23 +23,26 @@ public class Premise extends AbstractPremise {
 	private static final long serialVersionUID = -3069990790498836885L;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+
 	private Offer offer;
 	
-	@Column(name="foreign_location")
-	private String foreignLocation;
+	@Column(name="foreign_id")
+	private Long foreignId;
 
-	public String getForeignLocation() {
-		return foreignLocation;
+	public Long getForeignId() {
+		return foreignId;
 	}
 
-	public void setForeignLocation(String foreignLocation) {
-		this.foreignLocation = foreignLocation;
+	public void setForeignId(Long foreignId) {
+		this.foreignId = foreignId;
 	}
 
+	@JsonIgnore
 	public Offer getOffer() {
 		return offer;
 	}
 
+	@JsonProperty
 	public void setOffer(Offer offer) {
 		this.offer = offer;
 	}

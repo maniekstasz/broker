@@ -14,6 +14,9 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import soa.common.model.AbstractPremise;
 import soa.common.model.PicPath;
 
@@ -37,5 +40,16 @@ public class Premise extends AbstractPremise {
 	public void setOffer(Offer offer) {
 		this.offer = offer;
 	}
+	
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="premise", cascade={CascadeType.ALL})
+	private List<PremiseReservation> premiseReservations;
 
+	public List<PremiseReservation> getPremiseReservations() {
+		return premiseReservations;
+	}
+
+	public void setPremiseReservations(List<PremiseReservation> premiseReservations) {
+		this.premiseReservations = premiseReservations;
+	}
 }

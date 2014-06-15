@@ -16,20 +16,24 @@ import com.lowagie.text.pdf.PdfWriter;
 
 public class Invoicer {
 
-	private final static String accountNr = "123456789123456789";
+	private final String accountNr;
 
-	public Invoice getInvoice(Bill bill) {
-		return getInvoiceFromBill(bill);
+	public Invoicer(String accountNr) {
+		this.accountNr = accountNr;
 	}
 
-	public List<Invoice> getInvoices(List<Bill> bills) {
+	public Invoice getInvoice(Bill bill, String titlePrefix) {
+		return getInvoiceFromBill(bill, titlePrefix);
+	}
+
+	public List<Invoice> getInvoices(List<Bill> bills, String titlePrefix) {
 		List<Invoice> invoices = new ArrayList<Invoice>(bills.size());
 		for (Bill bill : bills)
-			invoices.add(getInvoice(bill));
+			invoices.add(getInvoice(bill, titlePrefix));
 		return invoices;
 	}
 
-	private Invoice getInvoiceFromBill(Bill bill) {
+	private Invoice getInvoiceFromBill(Bill bill, String titlePrefix) {
 		InvoicePart items[] = new InvoicePart[bill.getBillItems().size()];
 		for (int i = 0; i < bill.getBillItems().size(); i++) {
 			items[i] = new InvoicePart(
@@ -37,7 +41,7 @@ public class Invoicer {
 							.getBillItems().get(i).getItemPrice());
 		}
 		return new Invoice(accountNr, bill.getAmount(),
-				bill.getId().toString(), items);
+				titlePrefix + " id: " + bill.getId().toString(), items);
 	}
 
 	public void writeInvoicePdf(OutputStream outputStream, Invoice invoice)

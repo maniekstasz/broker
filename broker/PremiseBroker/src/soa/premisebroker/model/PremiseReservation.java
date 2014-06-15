@@ -17,12 +17,16 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import soa.common.model.AbstractReservation;
 
 @Entity
 @Table(name = "premise_reservations")
 @EntityListeners({AuditingEntityListener.class})
-public class PremiseReservation extends AbstractReservation {
+public class PremiseReservation extends AbstractReservation<User> {
 
 	/**
 	 * 
@@ -33,11 +37,9 @@ public class PremiseReservation extends AbstractReservation {
 	@ManyToOne(optional = false)
 	private Premise premise;
 
-
 	public Premise getPremise() {
 		return premise;
 	}
-	
 	public void setPremise(Premise premise) {
 		this.premise = premise;
 	}

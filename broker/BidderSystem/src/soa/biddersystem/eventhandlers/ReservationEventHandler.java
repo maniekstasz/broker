@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
+import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
 import soa.biddersystem.controller.ReservationDeclinedException;
@@ -32,32 +33,26 @@ public class ReservationEventHandler {
 	private Environment env;
 
 	@HandleBeforeCreate
-	public void checkAvailability(PremiseReservation reservation)
-			throws ReservationDeclinedException {
+	public void checkAvailability(PremiseReservation reservation){
+		setStatus(reservation);
+	}
+
+
+	private void setStatus(PremiseReservation reservation) {
 		if (premiseReservationRepository.isAvailable(
 				reservation.getReservedFrom(), reservation.getReservedTo(),
 				reservation.getPremise().getId()) > 0) {
-			ReservationRequestResponse reservationRequestResponse = new ReservationRequestResponse(
-					ReservationStatus.DECLINED,
-					"Obiekt jest ju¿ zajêty w tym czasie");
-			throw new ReservationDeclinedException(reservationRequestResponse);
-		}
-
-	}
-
-	@HandleAfterCreate
-	public void afterCreate(PremiseReservation reservation)
-			throws ReturnReservationResponseHack {
-		if (isPremiseBroker()) {
-			ReservationRequestResponse reservationRequestResponse = new ReservationRequestResponse(
-					ReservationStatus.ACCEPTED, "P³atne gotówk¹ na miejscu");
-			throw new ReturnReservationResponseHack(reservationRequestResponse);
+			reservation.setStatus(ReservationStatus.DECLINED);
+			reservation.setBidderNotes("Not available");
+		} else {
+			reservation.setBidderNotes("Payment on the spot");
+			reservation.setStatus(ReservationStatus.ACCEPTED);
 		}
 	}
-
-	private boolean isPremiseBroker() {
-		LoggedUser loggedUser = securityEventHandlerSupportBean.getLoggedUser();
-		return loggedUser.getUsername().equals(
-				env.getProperty("premisebroker.credentials.username"));
-	}
+//
+//	private boolean isPremiseBroker() {
+//		LoggedUser loggedUser = securityEventHandlerSupportBean.getLoggedUser();
+//		return loggedUser.getUsername().equals(
+//				env.getProperty("premisebroker.credentials.username"));
+//	}
 }

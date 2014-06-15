@@ -3,12 +3,13 @@ package soa.common.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "pic_paths")
+@JsonIgnoreProperties({"id","new"})
 public class PicPath extends AbstractPersistable<Long> {
 
 	/**
@@ -16,7 +17,6 @@ public class PicPath extends AbstractPersistable<Long> {
 	 */
 	private static final long serialVersionUID = -1406386925039860648L;
 
-	@NotNull
 	@Column(name = "pic_path")
 	private String picPath;
 

@@ -5,18 +5,18 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 
 @MappedSuperclass
 @EntityListeners({AuditingEntityListener.class})
@@ -33,9 +33,8 @@ public class AbstractOffer extends AbstractPersistable<Long>  {
 	private List<PicPath> picPaths;
 
 
-
-
 	@NotNull
+	@Column(length=1024)
 	private String description;
 	
 	@NotNull

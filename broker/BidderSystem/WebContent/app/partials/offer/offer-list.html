@@ -1,0 +1,29 @@
+<a data-ng-if="loggedUser.admin" href="#/offers/register">Register offer</a><br/>
+<div data-ng-repeat="resource in list.content" data-ng-controller="ElemCtrl">
+	<table class="table table-bordered table-hover table-condensed">
+		<tr>
+			<td class="col-sm-1  text-info">Description</td>
+			<td class="col-sm-11"><div>{{resource.content.description}}</div></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Pics</td>
+			<td class="col-sm-11"><ul class="list-inline">
+					<li data-ng-repeat="picPath in resource.content.picPaths"><img
+						style="max-width: 100px; max-height: 100px" class="thumbnail"
+						data-ng-src="{{picPath.picPath}}"></li>
+				</ul></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Premises</td>
+			<td class="col-sm-11"><a data-ng-click="changeLocation(resource.links.premises)">Premises</a></td>
+		</tr>
+		<tr data-ng-if="loggedUser.admin">
+			<td class="col-sm-1  text-info">Action</td>
+			<td class="col-sm-11" ><a data-ng-click="changeLocation(resource.links.self + '/update')">Update</a><a data-ng-click="delete(resource.links.self)">Delete</a></td>
+		</tr>
+	</table>
+</div>
+
+<pagination direction-links="true" total-items="list.page.totalElements"
+	page="adsList.page.number" num-pages="list.page.totalPages"
+	max-size="5" items-per-page="20" on-select-page="selectPage(page)"></pagination>

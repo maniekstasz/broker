@@ -15,7 +15,6 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.lowagie.text.DocumentException;
 
 import soa.common.finance.Invoice;
-import soa.common.model.User;
 import soa.common.model.AbstractReservation.ReservationStatus;
 import soa.premisebroker.extern.BidderRequester;
 import soa.premisebroker.finance.Biller;
@@ -26,6 +25,7 @@ import soa.premisebroker.model.Bill;
 import soa.premisebroker.model.BillItem;
 import soa.premisebroker.model.PremiseReservation;
 import soa.premisebroker.model.PriceDictionary;
+import soa.premisebroker.model.User;
 import soa.premisebroker.model.PriceDictionary.Product;
 import soa.premisebroker.repository.BidderRepository;
 import soa.premisebroker.repository.BillRepository;
@@ -61,7 +61,7 @@ public class InvoiceSendJob extends QuartzJobBean {
 		List<MonthlyBillData> billsData = bidderRepository
 				.getDataForMonthlyBill(previosJobDate);
 		List<Bill> bills = biller.getMonthlyBills(billsData);
-		List<Invoice> invoices = invoicer.getInvoices(bills);
+		List<Invoice> invoices = invoicer.getInvoices(bills, "Monthly invoice");
 		for (int i = 0; i < billsData.size(); i++) {
 			if (billsData.get(i).getUri() != null)
 				bidderRequester.sendInvoice(billsData.get(i).getUri(),

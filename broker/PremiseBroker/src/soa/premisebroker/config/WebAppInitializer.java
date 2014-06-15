@@ -18,7 +18,7 @@ public class WebAppInitializer extends
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {WebConfiguration.class,BrokerWebConfiguration.class };
+		return new Class[] {BrokerWebConfiguration.class };
 	}
 
 	@Override

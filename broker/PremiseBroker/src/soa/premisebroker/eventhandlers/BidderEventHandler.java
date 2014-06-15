@@ -53,10 +53,10 @@ public class BidderEventHandler {
 	@HandleAfterCreate
 	public void handleAfterBidderCreate(Bidder bidder)
 			throws MessagingException, DocumentException {
-		bidderRepository.getBiddersForReservationApproval(new Date(),
-				ReservationStatus.AWAITANING);
+//		bidderRepository.getBiddersForReservationApproval(new Date(),
+//				ReservationStatus.AWAITANING);
 		Bill bill = biller.getBillForBidderVerification(bidder);
-		Invoice invoice = invoicer.getInvoice(bill);
+		Invoice invoice = invoicer.getInvoice(bill, "Account verification");
 		BidderWebHook webHook = bidderRepository.getBidderWebHook(
 				bidder.getId(), WebHooType.INVOICE_SEND);
 		if (webHook != null)

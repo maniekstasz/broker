@@ -1,0 +1,30 @@
+<table class="table table-bordered table-hover table-condensed" data-ng-controller="PremiseReservationCtrl">
+		<tr data-ng-class="{success: resource.content.status=='ACCEPTED', 'danger':resource.content.status!='ACCEPTED'}">
+			<td class="col-sm-1  text-info">Status</td>
+			<td class="col-sm-11" ><div>{{resource.content.status}}</div></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Bidder notes</td>
+			<td class="col-sm-11"><div>{{resource.content.bidderNotes}}</div></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Reserved from</td>
+			<td class="col-sm-11"><div>{{resource.content.reservedFrom | date:'yyyy-MM-dd'}}</div></td>
+		</tr>
+				<tr>
+			<td class="col-sm-1  text-info">Reserved to</td>
+			<td class="col-sm-11"><div>{{resource.content.reservedTo | date:'yyyy-MM-dd'}}</div></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">User notes</td>
+			<td class="col-sm-11"><div>{{resource.content.userNotes}}</div></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Premise</td>
+			<td class="col-sm-11"><a data-ng-click="changeLocation(resource.links.premise)">Premise</a></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Action</td>
+			<td class="col-sm-11"></td>
+		</tr>
+	</table>

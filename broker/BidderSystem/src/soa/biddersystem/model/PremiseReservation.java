@@ -3,15 +3,19 @@ package soa.biddersystem.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import soa.common.model.AbstractReservation;
 
 @Entity
 @Table(name = "premise_reservations")
-public class PremiseReservation extends AbstractReservation {
+@EntityListeners({AuditingEntityListener.class})
+public class PremiseReservation extends AbstractReservation<User> {
 
 	/**
 	 * 
@@ -22,15 +26,15 @@ public class PremiseReservation extends AbstractReservation {
 	@ManyToOne(optional = false)
 	private Premise premise;
 
-	@Column(name="foreign_location")
-	private String foreignLocation;
+	@Column(name="foreign_id")
+	private Long foreignId;
 
-	public String getForeignLocation() {
-		return foreignLocation;
+	public Long getForeignId() {
+		return foreignId;
 	}
 
-	public void setForeignLocation(String foreignLocation) {
-		this.foreignLocation = foreignLocation;
+	public void setForeignId(Long foreignId) {
+		this.foreignId = foreignId;
 	}
 
 	public Premise getPremise() {

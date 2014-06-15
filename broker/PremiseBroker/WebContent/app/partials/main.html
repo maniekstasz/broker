@@ -1,0 +1,21 @@
+<h1 >Welcome in Premise Broker</h1>
+<div data-ng-if="!loggedUser.loggedIn">
+	<form novalidate data-ng-controller="LoginCtrl"
+		class="col-sm-3 form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-4">Login</label> <input type="text"
+				data-ng-model="loggedUser.login" class="form-control" />
+		</div>
+		<div class="form-group">
+			<label class="col-sm-4">Password</label> <input type="password"
+				data-ng-model="loggedUser.password" class="form-control" />
+		</div>
+		<div class="form-group">
+			<a href="#/users/register" class="success">Register</a>
+		</div>
+
+		<div class="form-group">
+			<button class="btn btn-success" data-ng-click="submit()">Submit</button>
+		</div>
+	</form>
+</div>

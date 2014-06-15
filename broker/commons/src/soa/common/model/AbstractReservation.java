@@ -8,10 +8,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @MappedSuperclass
-public abstract class AbstractReservation extends Auditable {
+public abstract class AbstractReservation<U extends AbstractUser> extends Auditable<U > {
 
 	/**
 	 * 

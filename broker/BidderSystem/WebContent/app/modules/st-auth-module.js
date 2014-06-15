@@ -4,8 +4,10 @@
 				'stAuthInterceptor',
 				function() {
 					this.$get = [
-							'$rootScope','Base64',
-							function($rootScope, Base64) {
+							'$rootScope',
+							'Base64',
+							'$q',
+							function($rootScope, Base64,$q) {
 								return {
 									request : function(config) {
 										if ($rootScope.loggedUser === undefined
@@ -22,52 +24,32 @@
 													+ encodedCredentials
 										});
 										return config;
-									}
-								// responseError : function(rejection) {
-								// if (rejection.headers)
-								// updateAuthToken(rejection.headers);
-								// switch (rejection.status) {
-								// case 401:
-								// if (rejection.config.headers['AuthToken']) {
-								// CommonFunctions.pushAlert('danger', "Twoja
-								// sesja wygasła proszę zaloguj się
-								// jeszcze raz");
-								// $location.path(self.loginUrl);
-								// } else if
-								// (rejection.config.data.match("login")) {
-								// CommonFunctions.pushAlert('danger', "Błędny
-								// login lub hasło")
-								// } else {
-								// CommonFunctions.pushAlertByType("login");
-								// $location.path(self.loginUrl);
-								// }
-								// return $q.reject(rejection);
-								// break;
-								// case 403:
-								// CommonFunctions.pushAlertByType("accessDenied");
-								// return $q.reject(rejection);
-								// break;
-								// case 400:
-								// CommonFunctions.pushAlertByType("badRequest");
-								// return $q.reject(rejection);
-								// break;
-								// case 441:
-								// CommonFunctions.pushAlert('danger', "Ktoś
-								// prawdopodobnie włamał się na Twoje
-								// konto. Zaloguj się ponownie i zmień hasło jak
-								// najszybciej!");
-								// Auth.setDeleteTokens();
-								// $location.path(self.loginUrl);
-								// return $q.reject(rejection);
-								// case 404:
-								// CommonFunctions.pushAlert('danger', "Strona
-								// której szukasz nie istnieje.");
-								// return $q.reject(rejection);
-								// default:
-								// return $q.reject(rejection);
-								//
-								// }
-								// },
+									},
+									responseError : function(rejection) {
+										switch (rejection.status) {
+										case 403:
+											alert("Forbidden");
+											return $q.reject(rejection);
+											break;
+										case 401:
+											alert("Unauthorized");
+											return $q.reject(rejection);
+											break;
+										case 400:
+											alert("Bad request");
+											return $q.reject(rejection);
+											break;
+										case 404:
+											alert("Not found");
+											return $q.reject(rejection);
+										case 409:
+											alert("Conflict");
+											return $q.reject(rejection);
+										default:
+											return $q.reject(rejection);
+
+										}
+									},
 								// response : function(response) {
 								// updateAuthToken(response.headers);
 								// return response || $q.when(response);

@@ -10,6 +10,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import soa.common.model.AbstractOffer;
 
 @Entity
@@ -21,12 +24,20 @@ public class Offer extends AbstractOffer {
 	 */
 	private static final long serialVersionUID = -8946121525059476870L;
 	
-	@Column(name="foreign_location")
-	private String foreignLocation;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "offer", cascade = {
 			CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE })
-	@Valid
 	private List<Premise> premises;
+	
+	@Column(name="foreign_id")
+	private Long foreignId;
+
+	public Long getForeignId() {
+		return foreignId;
+	}
+
+	public void setForeignId(Long foreignId) {
+		this.foreignId = foreignId;
+	}
 	
 	public List<Premise> getPremises() {
 		return premises;
@@ -38,12 +49,5 @@ public class Offer extends AbstractOffer {
 			premise.setOffer(this);
 	}
 
-	public String getForeignLocation() {
-		return foreignLocation;
-	}
-
-	public void setForeignLocation(String foreignLocation) {
-		this.foreignLocation = foreignLocation;
-	}
 
 }

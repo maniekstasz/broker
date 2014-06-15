@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import soa.premisebroker.model.Bidder;
 import soa.premisebroker.model.Bill;
@@ -26,10 +27,13 @@ public class Biller {
 
 	@Autowired
 	private PriceDictionaryRepository priceDictionaryRepository;
+	
+	@Autowired
+	private Environment env;
 
 	public Bill getBillForBidderVerification(Bidder bidder) {
 		BillItem billItem = new BillItem("Account verification", new Double(1));
-		Bill bill = new Bill(bidder, Arrays.asList(billItem));
+		Bill bill = new Bill(bidder, Arrays.asList(billItem), null);
 		bill = billRepository.save(bill);
 		return bill;
 	}
@@ -46,7 +50,7 @@ public class Biller {
 			BillItem offerItem = new BillItem(billData.getOffersCnt()
 					+ " ofert", billData.getOffersCnt()*offerDict.getPrice());
 			Bidder bidder = bidderRepository.findOne(billData.getBidderId());
-			Bill bill = new Bill(bidder, Arrays.asList(resItem, offerItem));
+			Bill bill = new Bill(bidder, Arrays.asList(resItem, offerItem), new Date(new Date().getTime() + 1000*60*60*24*5));
 			bills.add(bill);
 			bill = billRepository.save(bill);
 		}

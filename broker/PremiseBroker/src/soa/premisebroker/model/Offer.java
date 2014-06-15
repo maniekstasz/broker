@@ -21,12 +21,14 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import soa.common.model.AbstractOffer;
 import soa.common.model.PicPath;
 
 @Entity
 @Table(name = "offers")
-public class Offer extends AbstractOffer{
+public class Offer extends AbstractOffer {
 
 	/**
 	 * 
@@ -35,16 +37,16 @@ public class Offer extends AbstractOffer{
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Bidder bidder;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "offer", cascade = {
 			CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE })
-	@Valid
 	private List<Premise> premises;
-	
+
 	public void setPremises(List<Premise> premises) {
 		this.premises = premises;
-		for (Premise premise : this.premises)
-			premise.setOffer(this);
+		if (this.premises != null)
+			for (Premise premise : this.premises)
+				premise.setOffer(this);
 	}
 
 	public Bidder getBidder() {
@@ -58,6 +60,5 @@ public class Offer extends AbstractOffer{
 	public List<Premise> getPremises() {
 		return premises;
 	}
-
-
+	
 }

@@ -2,10 +2,12 @@ package soa.premisebroker.eventhandlers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
+import org.springframework.data.rest.core.annotation.HandleBeforeDelete;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.access.AccessDeniedException;
 
+import soa.common.model.PicPath;
 import soa.common.security.LoggedUser;
 import soa.common.security.SecurityEventHandlerSupportBean;
 import soa.premisebroker.model.Bidder;
@@ -27,27 +29,23 @@ public class OfferEventHandler {
 
 	@HandleBeforeCreate
 	public void authorize(Offer offer) throws AccessDeniedException {
-//		Long bidderId = offer.getBidder().getId();
-		isAuthorize();
-	}
-	
-	@HandleBeforeCreate
-	public void afterAuthorize(Offer offer){
-		LoggedUser user = securitySupportBean.getLoggedUser();
+		LoggedUser user = isAuthorize();
 		offer.setBidder(bidderRepository.findByCreatedById(user.getId()));
 	}
 
 	@HandleBeforeSave
+	@HandleBeforeDelete
 	public void authorizeChange(Offer offer) {
-//		Offer offerInDb = offerRepository.findOne(offer.getId());
+		// Offer offerInDb = offerRepository.findOne(offer.getId());
 		isAuthorize();
 	}
 
-	private void isAuthorize() throws AccessDeniedException {
+	private LoggedUser isAuthorize() throws AccessDeniedException {
 		LoggedUser user = securitySupportBean.getLoggedUser();
 		Bidder bidder = bidderRepository.findByCreatedById(user.getId());
 		if (bidder == null || !bidder.getVerified())
 			throw new AccessDeniedException("Not authorized");
+		return user;
 	}
 
 }

@@ -1,0 +1,31 @@
+	<table class="table no-borders table-condesend" data-ng-controller="ElemCtrl">
+		<tr>
+			<td class="col-sm-1  text-info">Description</td>
+			<td class="col-sm-11"><div>{{resource.content.description}}</div></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Price</td>
+			<td class="col-sm-11"><div>{{resource.content.price}}</div></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Persons number</td>
+			<td class="col-sm-11"><div>{{resource.content.personsNumber}}</div></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Pics</td>
+			<td class="col-sm-11"><ul class="list-inline">
+					<li data-ng-repeat="picPath in resource.content.picPaths"><img
+						style="max-width: 100px; max-height: 100px" class="thumbnail"
+						data-ng-src="{{picPath.picPath}}"></li>
+				</ul></td>
+		</tr>
+		<tr>
+			<td class="col-sm-1  text-info">Reservation</td>
+			<td class="col-sm-11"><a
+				data-ng-click="changeLocation('/premises/{{resource.content.id}}/premiseReservations/register')">Create reservation</a></td>
+		</tr>
+				<tr data-ng-if="loggedUser.admin">
+			<td class="col-sm-1  text-info">Action</td>
+			<td class="col-sm-11"><a  data-ng-click="delete(resource.links.self)">Delete</a><a data-ng-click="changeLocation(resource.links.self + '/update')">Update</a></td>
+		</tr>
+	</table>

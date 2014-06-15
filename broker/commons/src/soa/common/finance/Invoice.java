@@ -45,20 +45,34 @@ public class Invoice implements Serializable {
 	}
 
 	public static class InvoicePart {
-		private final String name;
-		private final double amount;
+		private  String name;
+		private  Double amount;
 
-		public InvoicePart(String name, double amount) {
+		public InvoicePart(String name, Double amount) {
 			this.name = name;
 			this.amount = amount;
 		}
 
+		
+		public InvoicePart(){
+			
+		}
 		public String getName() {
 			return name;
 		}
 
-		public double getAmount() {
+		public Double getAmount() {
 			return amount;
+		}
+
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+
+		public void setAmount(Double amount) {
+			this.amount = amount;
 		}
 	}
 

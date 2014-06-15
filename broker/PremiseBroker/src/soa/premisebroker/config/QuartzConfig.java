@@ -21,6 +21,8 @@ import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import soa.premisebroker.model.DebtCollectorDto;
+import soa.premisebroker.quartz.job.DebtCollectorSendJob;
 import soa.premisebroker.quartz.job.InvoiceSendJob;
 import soa.premisebroker.quartz.job.OflineReservationSendJob;
 
@@ -51,7 +53,7 @@ public class QuartzConfig {
 		quartzScheduler.setJobFactory(jobFactory);
 		quartzScheduler.setTriggers(new Trigger[] {
 				reservationsEmailSendTriggerFactory().getObject(),
-				invoiceSendTriggerFactory().getObject() });
+				invoiceSendTriggerFactory().getObject(), debtCollectionTriggerFactory().getObject() });
 		return quartzScheduler;
 	}
 
@@ -74,7 +76,28 @@ public class QuartzConfig {
 		jobDetailFactory.setName("monthly_invoice_send");
 		return jobDetailFactory;
 	}
+	
+	@Bean
+	public JobDetailFactoryBean debtCollectionJobFactory() {
+		JobDetailFactoryBean jobDetailFactory = new JobDetailFactoryBean();
+		jobDetailFactory.setJobClass(DebtCollectorSendJob.class);
+		jobDetailFactory.setDurability(true);
+		jobDetailFactory.setGroup("batch-quartz");
+		jobDetailFactory.setName("debt_collection_send");
+		return jobDetailFactory;
+	}
+	
+	@Bean
+	public CronTriggerFactoryBean debtCollectionTriggerFactory() {
+		CronTriggerFactoryBean cronTriggerFactoryBean = new CronTriggerFactoryBean();
 
+		cronTriggerFactoryBean.setJobDetail(debtCollectionJobFactory()
+				.getObject());
+		cronTriggerFactoryBean.setCronExpression(env
+				.getProperty("cron.expressions.debtCollection"));
+		cronTriggerFactoryBean.setGroup("batch-quartz");
+		return cronTriggerFactoryBean;
+	}
 	@Bean
 	public CronTriggerFactoryBean reservationsEmailSendTriggerFactory() {
 		CronTriggerFactoryBean cronTriggerFactoryBean = new CronTriggerFactoryBean();
@@ -98,22 +121,5 @@ public class QuartzConfig {
 		return cronTriggerFactoryBean;
 	}
 
-	// @Bean
-	// public Properties quartzProperties() {
-	// PropertiesFactoryBean propertiesFactoryBean = new
-	// PropertiesFactoryBean();
-	// propertiesFactoryBean.setLocation(new ClassPathResource(
-	// "/spring-config/quartz.properties"));
-	// Properties properties = null;
-	// try {
-	// propertiesFactoryBean.afterPropertiesSet();
-	// properties = propertiesFactoryBean.getObject();
-	//
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return properties;
-	// }
 
 }

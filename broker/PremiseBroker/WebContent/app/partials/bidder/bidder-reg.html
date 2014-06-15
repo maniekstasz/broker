@@ -1,0 +1,44 @@
+<form novalidate class="form-horizontal col-sm-8">
+
+	<div data-st-form-elem data-st-label="First name">
+		<input class="form-control" type="text"
+			data-ng-model="resource.content.firstname" />
+	</div>
+	<div data-st-form-elem data-st-label="Last name">
+		<input class="form-control" type="text"
+			data-ng-model="resource.content.lastname" />
+	</div>
+	<div data-st-form-elem data-st-label="Account nr">
+		<input class="form-control" type="text"
+			data-ng-model="resource.content.accountNr" />
+	</div>
+
+	<div data-st-form-elem data-st-label="Postal code">
+		<input class="form-control"
+			data-ng-model="resource.content.address.zip" />
+	</div>
+	<div data-st-form-elem data-st-label="Street">
+		<input class="form-control"
+			data-ng-model="resource.content.address.street" />
+	</div>
+	<div data-st-form-elem data-st-label="City">
+		<input class="form-control"
+			data-ng-model="resource.content.address.city" />
+	</div>
+	<div data-st-form-elem data-st-label="Home nr">
+		<input class="form-control"
+			data-ng-model="resource.content.address.homeNr" />
+	</div>
+
+	<div data-st-form-elem data-st-label="Reservation web hook">
+		<input class="form-control" data-ng-model="webHooks.reservation.uri" />
+	</div>
+	<div data-st-form-elem data-st-label="Invoice web hook">
+		<input class="form-control" data-ng-model="webHooks.invoice.uri" />
+	</div>
+	<div class="form-group">
+		<div>
+			<button class="btn btn-success" data-ng-click="submit()">Save</button>
+		</div>
+	</div>
+</form>

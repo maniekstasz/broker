@@ -1,6 +1,7 @@
 package soa.common.security;
 
 import java.nio.charset.Charset;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,20 @@ public class SecurityEventHandlerSupportBean {
 			throw new AccessDeniedException("Not authorized");
 		}
 
+	}
+
+	public boolean isTheSameUser(LoggedUser loggedUser,
+			HttpServletRequest request) {
+		System.out.println(request.getRequestURI());
+		String parts[] = request.getRequestURI().split("/");
+		for (int i = 0; i < parts.length; i++) {
+			if (parts[i].equals("users") && i + 1 < parts.length
+					&& parts[i + 1].matches("[0-9]*")){
+				System.out.println(parts[i + 1].matches("^[0-9]*$"));
+				return loggedUser.getId().equals(new Long(parts[i + 1]));
+			}
+		}
+		return true;
 	}
 
 	public <T> HttpEntity<T> addAuthenticationHeader(T entity, String password,

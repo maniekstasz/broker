@@ -1,11 +1,8 @@
 package soa.common.model;
 
 import java.io.Serializable;
-import java.security.SecureRandom;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

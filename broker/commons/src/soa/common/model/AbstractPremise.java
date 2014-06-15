@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+
 @MappedSuperclass
 public class AbstractPremise extends AbstractPersistable<Long> {
 
@@ -29,6 +30,7 @@ public class AbstractPremise extends AbstractPersistable<Long> {
 	private List<PicPath> picPaths;
 
 	@NotNull
+	@Column(length=1024)
 	private String description;
 
 	@NotNull

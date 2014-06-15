@@ -15,7 +15,10 @@
 	src="resources/components/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="resources/components/angular.js"></script>
 <script type="text/javascript" src="resources/components/ngShowHide.js"></script>
-
+<script type="text/javascript"
+	src="resources/components/localstorage.js"></script>
+<script type="text/javascript"
+	src="resources/components/angular-cookies.js"></script>
 <script type="text/javascript"
 	src="resources/components/ui-bootstrap-custom-0.10.0.js"></script>
 <!-- 	models -->
@@ -41,26 +44,27 @@
         <![endif]-->
 	<div class="container">
 		<div class="header">
-			<ul class="nav nav-pills pull-right">
-				<li><a href="#/users/register">Register user</a></li>
-				<li><a href="#/users">Users</a></li>
+			<ul data-ng-if="loggedUser.loggedIn" class="nav nav-pills pull-right">
+				<li><a data-ng-if="!loggedUser.bidderId"
+					data-ng-href="#/users/{{loggedUser.id}}/premiseReservations">Premise
+						Reservations</a></li>
+				<li><a data-ng-if="loggedUser.bidderId"
+					data-ng-href="#/premiseReservations/search/bidder">Premise
+						Reservations</a></li>
+				<li data-ng-if="loggedUser.bidderId"><a
+					href="#/bidders/{{loggedUser.bidderId}}/offers">Bidder offers</a></li>
+					<li data-ng-if="!loggedUser.bidderId"><a href="#/users/{{loggedUser.id}}/favouriteOffers">Favourite offers</a></li>
+				<li data-ng-if="!loggedUser.bidderId"><a href="#/offers">Offers</a></li>
+				<li data-ng-if="loggedUser.loggedIn && !loggedUser.bidderId"><a
+					href="#/bidders/register">Bidder register</a></li>
+				<li data-ng-controller="LogoutCtrl" data-ng-if="loggedUser.loggedIn"><a
+					data-ng-click="logout()">Log out</a></li>
 			</ul>
 			<h3 class="text-muted">Premise broker</h3>
 		</div>
 		<div class="jumbotron">
 			<div class="row">
-				<div class="col-sm-9" data-ng-view=""></div>
-				<div data-ng-controller="LoginCtrl" class="col-sm-3 form-horizontal">
-					<div class="form-group">
-						<label class="col-sm-4">Login</label> <input type="text"
-							data-ng-model="loggedUser.login" class="form-control" />
-					</div>
-					<div class="form-group">
-						<label class="col-sm-4">Password</label> <input type="password"
-							data-ng-model="loggedUser.password" class="form-control" />
-					</div>
-				</div>
-
+				<div data-ng-view=""></div>
 			</div>
 		</div>
 	</div>

@@ -1,17 +1,17 @@
 package soa.common.model;
 
 import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import soa.common.model.Credentials;
 
-@Entity
-@Table(name = "users")
-public class User extends AbstractPersistable<Long> {
+
+@MappedSuperclass
+public abstract class AbstractUser extends AbstractPersistable<Long> {
 
 	/**
 	 * 

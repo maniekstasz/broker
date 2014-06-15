@@ -11,18 +11,34 @@
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
 			ref="authenticationProvider" />
+			
+    
 	</security:authentication-manager>
 
+	<security:http pattern="/app/**" security="none"></security:http>
+	<security:http pattern="/resources/**" security="none"></security:http>
+	<security:http pattern="/wire/notification" security="none" />
+	
 	<security:http use-expressions="true" create-session="stateless">
 		<security:anonymous enabled="true" />
-		<security:http-basic />
-		
-		<security:intercept-url pattern="/api/users" method="POST" access="permitAll()" requires-channel="https"/>
-		<security:intercept-url pattern="/app/**" method="GET" access="permitAll()" requires-channel="https"/>
-		<security:intercept-url pattern="/resources/**" method="GET" access="permitAll()" requires-channel="https"/>
-		<security:intercept-url pattern="/" method="GET" access="permitAll()" requires-channel="https"/>
-		
-		<security:intercept-url pattern="/**" access="authenticated" requires-channel="https"/>
+				<security:http-basic entry-point-ref="customAuthenticationEntryPoint"/>
+		<security:intercept-url pattern="/api/users"
+			method="POST" access="permitAll()" requires-channel="https" />
+
+			
+
+		<security:intercept-url pattern="/" method="GET"
+			access="permitAll()" requires-channel="https" />
+		<security:intercept-url pattern="/" method="POST"
+			access="permitAll()" />
+		<security:intercept-url pattern="/api/users/**"
+			method="GET"
+			access="authenticated and @securityEventHandlerSupportBean.isTheSameUser(principal, request)"
+			requires-channel="https" />
+
+		<security:intercept-url pattern="/**" access="authenticated"
+			requires-channel="https" />
+
 
 	</security:http>
 </beans>

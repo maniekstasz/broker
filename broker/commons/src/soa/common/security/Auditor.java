@@ -2,20 +2,20 @@ package soa.common.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import soa.common.model.User;
-import soa.common.repository.UserRepository;
+import soa.common.model.AbstractUser;
 
-public class Auditor implements AuditorAware<User> {
+public class Auditor<U extends AbstractUser> implements
+		AuditorAware<AbstractUser> {
 
 	@Autowired
-	private UserRepository userRepository;
+	private CrudRepository<U, Long> userRepository;
 
 	@Override
-	public User getCurrentAuditor() {
+	public AbstractUser getCurrentAuditor() {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		if (auth != null && auth.isAuthenticated()) {

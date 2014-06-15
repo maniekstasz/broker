@@ -33,13 +33,13 @@ public class Bill extends AbstractPersistable<Long>{
 		PAID, AWAITANING, CANCELED
 	};
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, mappedBy = "bill")
+	@OneToMany(fetch=FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "bill")
 	private List<BillItem> billItems;
 
 	@NotNull
 	private BillStatus status;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(fetch=FetchType.EAGER, optional = false)
 	private Bidder bidder;
 
 	@CreatedDate
@@ -49,9 +49,13 @@ public class Bill extends AbstractPersistable<Long>{
 	@LastModifiedDate
 	@Column(name="last_modified_date", nullable=false)
 	private Date lastModifiedDate;
+	
+	@Column(name="due_date")
+	private Date dueDate;
 
-	public Bill(Bidder bidder, List<BillItem> billItems) {
+	public Bill(Bidder bidder, List<BillItem> billItems, Date dueDate) {
 		this.bidder = bidder;
+		this.dueDate = dueDate;
 		this.billItems = billItems;
 		for (BillItem item : this.billItems)
 			item.setBill(this);
@@ -95,6 +99,14 @@ public class Bill extends AbstractPersistable<Long>{
 			amount += billItem.getItemPrice();
 		}
 		return amount;
+	}
+
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
 	}
 
 }

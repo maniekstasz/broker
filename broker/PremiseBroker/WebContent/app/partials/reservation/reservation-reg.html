@@ -1,0 +1,24 @@
+<form novalidate class="form-horizontal col-sm-8">
+	<div data-st-form-elem data-st-label="User notes">
+		<textarea class="form-control"
+			data-ng-model="resource.content.userNotes"></textarea>
+	</div>
+	<div data-st-form-elem data-st-label="Reserved from">
+		<input class="form-control" type="date"
+			data-ng-model="resource.content.reservedFrom" date-format />
+	</div>
+	<div data-st-form-elem data-st-label="Reserved to">
+		<input class="form-control" type="date"
+			data-ng-model="resource.content.reservedTo" date-format />
+	</div>
+	<div data-ng-if="update" class="form-group">
+		<label class="control-label checkbox-inline" >
+           <input type="checkbox" data-ng-model="resource.canceled" /> Cancel registration
+       </label>
+	</div>
+	<div class="form-group">
+		<div>
+			<button class="btn btn-success" data-ng-click="submit()">Save</button>
+		</div>
+	</div>
+</form>

@@ -3,24 +3,23 @@ package soa.common.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @MappedSuperclass
-public class Auditable extends AbstractPersistable<Long> {
+public class Auditable<U extends AbstractUser> extends AbstractPersistable<Long> {
 	/**
 	 * 
 	 */
@@ -29,7 +28,7 @@ public class Auditable extends AbstractPersistable<Long> {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "created_by")
 	@CreatedBy
-	private User createdBy;
+	private U createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_date", nullable = false)
@@ -39,19 +38,20 @@ public class Auditable extends AbstractPersistable<Long> {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "last_modified_by")
 	@LastModifiedBy
-	private User lastModifiedBy;
+	private U lastModifiedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_modified_date", nullable = false)
 	@LastModifiedDate
 	private Date lastModifiedDate;
 
-	public User getCreatedBy() {
+	@JsonIgnore
+	public U getCreatedBy() {
 
 		return createdBy;
 	}
 
-	public void setCreatedBy(final User createdBy) {
+	public void setCreatedBy(final U createdBy) {
 
 		this.createdBy = createdBy;
 	}
@@ -63,13 +63,13 @@ public class Auditable extends AbstractPersistable<Long> {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
-	public User getLastModifiedBy() {
+	@JsonIgnore
+	public U getLastModifiedBy() {
 
 		return lastModifiedBy;
 	}
 
-	public void setLastModifiedBy(final User lastModifiedBy) {
+	public void setLastModifiedBy(final U lastModifiedBy) {
 
 		this.lastModifiedBy = lastModifiedBy;
 	}

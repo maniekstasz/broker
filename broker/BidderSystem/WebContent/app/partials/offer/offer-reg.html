@@ -1,0 +1,21 @@
+<form novalidate class="form-horizontal col-sm-8">
+	<div data-st-form-elem data-st-label="Description">
+		<textarea class="form-control"
+			data-ng-model="resource.content.description"></textarea>
+	</div>
+	<div data-ng-if="!update">
+		<div data-st-form-elem data-st-label="Pic uri">
+			<input class="form-control" type="text"
+				data-ng-model="picPaths.b.picPath" />
+		</div>
+		<div data-st-form-elem data-st-label="Pic uri">
+			<input class="form-control" type="text"
+				data-ng-model="picPaths.a.picPath" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div>
+			<button class="btn btn-success" data-ng-click="submit()">Save</button>
+		</div>
+	</div>
+</form>

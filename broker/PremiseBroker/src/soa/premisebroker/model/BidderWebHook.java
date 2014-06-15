@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -24,9 +25,11 @@ public class BidderWebHook extends AbstractPersistable<Long> {
 
 	@NotNull
 	@NotEmpty
+	@URL
 	private String uri;
 	
 	@NotNull
+
 	private WebHooType type;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional=false)

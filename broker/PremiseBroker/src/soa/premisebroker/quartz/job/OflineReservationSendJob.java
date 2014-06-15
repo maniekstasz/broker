@@ -8,11 +8,11 @@ import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import soa.common.model.User;
 import soa.common.model.AbstractReservation.ReservationStatus;
 import soa.premisebroker.extern.BidderRequester;
 import soa.premisebroker.model.Bidder;
 import soa.premisebroker.model.PremiseReservation;
+import soa.premisebroker.model.User;
 import soa.premisebroker.repository.BidderRepository;
 import soa.premisebroker.repository.PremiseReservationRepository;
 
@@ -39,7 +39,7 @@ public class OflineReservationSendJob extends QuartzJobBean {
 		if (bidders != null)
 			for (Bidder bidder : bidders) {
 				List<PremiseReservation> reservations = reservationRepository
-						.getAwaitaningRepositoriesForSend(previosJobDate,
+						.getAwaitaningReservationsForSend(previosJobDate,
 								ReservationStatus.AWAITANING, bidder.getId());
 				bidderRequester.sendReservationsRequestsEmail(((User) bidder
 						.getCreatedBy()).getCredentials().getMail(),
