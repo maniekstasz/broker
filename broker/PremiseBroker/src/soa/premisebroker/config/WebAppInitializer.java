@@ -1,12 +1,8 @@
 package soa.premisebroker.config;
 
 import javax.servlet.Filter;
-import javax.servlet.FilterRegistration.Dynamic;
-
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import soa.common.config.WebConfiguration;
 
 public class WebAppInitializer extends
 		AbstractAnnotationConfigDispatcherServletInitializer {

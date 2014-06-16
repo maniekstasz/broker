@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import soa.premisebroker.extern.DebtCollectorRequester;
-import soa.premisebroker.finance.MonthlyBillData;
 import soa.premisebroker.model.Bill;
 import soa.premisebroker.model.DebtCollectorDto;
 import soa.premisebroker.repository.BidderRepository;

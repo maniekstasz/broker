@@ -1,7 +1,5 @@
 package soa.premisebroker.quartz.job;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,21 +13,13 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.lowagie.text.DocumentException;
 
 import soa.common.finance.Invoice;
-import soa.common.model.AbstractReservation.ReservationStatus;
 import soa.premisebroker.extern.BidderRequester;
 import soa.premisebroker.finance.Biller;
 import soa.premisebroker.finance.Invoicer;
 import soa.premisebroker.finance.MonthlyBillData;
-import soa.premisebroker.model.Bidder;
 import soa.premisebroker.model.Bill;
-import soa.premisebroker.model.BillItem;
-import soa.premisebroker.model.PremiseReservation;
-import soa.premisebroker.model.PriceDictionary;
-import soa.premisebroker.model.User;
-import soa.premisebroker.model.PriceDictionary.Product;
 import soa.premisebroker.repository.BidderRepository;
 import soa.premisebroker.repository.BillRepository;
-import soa.premisebroker.repository.PremiseReservationRepository;
 import soa.premisebroker.repository.PriceDictionaryRepository;
 
 public class InvoiceSendJob extends QuartzJobBean {

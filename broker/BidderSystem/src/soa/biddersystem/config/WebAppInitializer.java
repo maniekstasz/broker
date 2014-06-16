@@ -6,8 +6,6 @@ import javax.servlet.Filter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import soa.common.config.WebConfiguration;
-
 public class WebAppInitializer extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
 

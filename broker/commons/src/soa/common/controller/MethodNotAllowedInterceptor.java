@@ -3,7 +3,6 @@ package soa.common.controller;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.http.MethodNotSupportedException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class MethodNotAllowedInterceptor extends HandlerInterceptorAdapter {

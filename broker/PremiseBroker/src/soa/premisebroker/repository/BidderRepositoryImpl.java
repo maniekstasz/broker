@@ -3,24 +3,11 @@ package soa.premisebroker.repository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Subquery;
-
-import org.springframework.stereotype.Repository;
-
 import soa.common.model.AbstractReservation.ReservationStatus;
 import soa.premisebroker.finance.MonthlyBillData;
-import soa.premisebroker.model.Bidder;
-import soa.premisebroker.model.PremiseReservation;
 
 public class BidderRepositoryImpl implements BidderRepositoryCustom {
 

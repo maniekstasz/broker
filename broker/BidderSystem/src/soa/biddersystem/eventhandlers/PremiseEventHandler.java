@@ -17,10 +17,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import soa.biddersystem.model.Offer;
 import soa.biddersystem.model.Premise;
 import soa.biddersystem.model.PremiseDto;
-import soa.biddersystem.repository.OfferRepository;
 import soa.biddersystem.repository.PremiseRepository;
 import soa.common.security.SecurityEventHandlerSupportBean;
 import soa.common.utils.LocationUtils;

@@ -1,27 +1,15 @@
 package soa.premisebroker.config;
 
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
 import org.quartz.Trigger;
-import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
-
-import soa.premisebroker.model.DebtCollectorDto;
 import soa.premisebroker.quartz.job.DebtCollectorSendJob;
 import soa.premisebroker.quartz.job.InvoiceSendJob;
 import soa.premisebroker.quartz.job.OflineReservationSendJob;

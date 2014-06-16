@@ -7,8 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import soa.common.model.AbstractUser;

@@ -3,9 +3,6 @@ package soa.premisebroker.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import soa.common.config.WebConfiguration;
@@ -65,17 +62,4 @@ public class BrokerWebConfiguration extends WebConfiguration {
 		mapping.setInterceptors(new Object[] { mnaInterceptor });
 		return mapping;
 	}
-	// @Bean
-	// public ResourceProcessor<Resource<PremiseReservation>> userProcessor(){
-	// return new ResourceProcessor<Resource<PremiseReservation>>() {
-	// @Override public Resource<PremiseReservation>
-	// process(Resource<PremiseReservation> resource) {
-	// resource.add(new Link(resource.g))
-	// resource.add(new Link(resource.getId().getHref() +
-	// "/premiseReservations", "premiseReservations"));
-	// resource.add(new Link(resource.getId().getHref() + "/offers", "offers"));
-	// return resource;
-	// }
-	// };
-	// }
 }

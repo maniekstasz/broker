@@ -8,14 +8,11 @@ import java.util.Arrays;
 
 import javax.net.ssl.SSLContext;
 
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +22,9 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.ws.client.core.WebServiceTemplate;
-import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
-import org.springframework.ws.transport.http.CommonsHttpMessageSender;
-import org.tempuri.BankLocator;
-
 import soa.biddersystem.controller.FinanceController;
 import soa.biddersystem.controller.ReservationController;
 import soa.biddersystem.finance.PaymentService;
@@ -103,22 +92,6 @@ public class MainConfig extends AbstractMainConfig {
 				httpClient));
 	}
 	
-//	@Bean
-//	public ObjectFactory objectFactory(){
-//		return new ObjectFactory();
-//	}
-//
-//	@Bean
-//	public WebServiceTemplate webServiceTemplate(){
-//		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-//		marshaller.setContextPaths("org.tempuri","org.datacontract.schemas._2004._07.bank","com.microsoft.schemas._2003._10.serialization");
-//		WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
-//		webServiceTemplate.setMarshaller(marshaller);
-//		webServiceTemplate.setUnmarshaller(marshaller);
-////		webServiceTemplate.setMessageSender(new CommonsHttpMessageSender());
-//		webServiceTemplate.setDefaultUri(env.getProperty("bank.url"));
-//		return webServiceTemplate;
-//	}
 	
 
 }

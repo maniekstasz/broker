@@ -11,7 +11,6 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import soa.common.model.AbstractReservation.ReservationStatus;
 import soa.premisebroker.model.PremiseReservation;
-import soa.premisebroker.model.User;
 
 public interface PremiseReservationRepository extends
 		PagingAndSortingRepository<PremiseReservation, Long> {

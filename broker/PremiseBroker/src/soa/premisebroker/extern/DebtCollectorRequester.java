@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.tempuri.DebtCollectorLocator;
 import org.tempuri.IDebtCollector;
 
-import soa.premisebroker.model.Address;
 import soa.premisebroker.model.DebtCollectorDto;
-import soa.premisebroker.quartz.job.DebtCollectorSendJob;
 
 @Service
 public class DebtCollectorRequester {

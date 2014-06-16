@@ -24,12 +24,5 @@ public class FinanceController {
 		paymentService.pay(invoice);
 	}
 	
-	@RequestMapping(value="/temp", method=RequestMethod.GET)
-	@ResponseBody
-	public void handleInvoiceReceive2(){
-		Invoice invoice = new Invoice("424234", 234.0,"asdfa",null);
-		paymentService.pay(invoice);
-	}
-
 
 }

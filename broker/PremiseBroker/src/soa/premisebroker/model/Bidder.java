@@ -23,12 +23,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import soa.common.model.Auditable;
-import soa.premisebroker.model.BidderWebHook.WebHooType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

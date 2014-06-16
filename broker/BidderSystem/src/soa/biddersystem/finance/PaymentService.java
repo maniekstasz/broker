@@ -2,7 +2,6 @@ package soa.biddersystem.finance;
 
 import java.rmi.RemoteException;
 
-import javax.annotation.Resource;
 import javax.xml.rpc.ServiceException;
 
 import org.datacontract.schemas._2004._07.Bank.WireResult;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.ws.client.core.WebServiceTemplate;
-import org.springframework.ws.soap.client.core.SoapActionCallback;
 import org.tempuri.BankLocator;
 import org.tempuri.IBank;
 

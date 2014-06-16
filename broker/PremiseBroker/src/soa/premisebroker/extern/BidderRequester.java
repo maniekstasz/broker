@@ -24,7 +24,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.lowagie.text.DocumentException;
@@ -59,17 +58,6 @@ public class BidderRequester {
 				.addAuthenticationHeader(invoice, "password", "premisebroker");
 		restTemplate.postForLocation(uri, entity);
 	}
-
-	// public ReservationRequestResponse sendReservationRequest(String uri,
-	// PremiseReservationDto reservation) {
-	// HttpEntity<PremiseReservationDto> entity =
-	// securityEventHandlerSupportBean
-	// .addAuthenticationHeader(reservation, "password",
-	// "premisebroker");
-	// ReservationRequestResponse response = restTemplate.postForObject(uri,
-	// entity, ReservationRequestResponse.class);
-	// return response;
-	// }
 
 	public ReservationRequestResponse sendReservation(String uri,
 			PremiseReservationDto reservation, boolean update) {

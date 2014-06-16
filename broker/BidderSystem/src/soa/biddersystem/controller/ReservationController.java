@@ -3,7 +3,6 @@ package soa.biddersystem.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,8 +57,6 @@ public class ReservationController {
 				premiseReservation.getBidderNotes());
 	}
 
-//	@RequestMapping(value = "/foreignReservation", method = RequestMethod.PATCH)
-//	@ResponseBody
 	private ReservationRequestResponse handleReservationUpdate(
 			@RequestBody PremiseReservationDto resDto) {
 		PremiseReservation premiseReservation = reservationRepository

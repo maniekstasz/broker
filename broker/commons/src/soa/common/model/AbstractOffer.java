@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.EntityListeners;
 import javax.persistence.JoinTable;
 import javax.persistence.MappedSuperclass;
@@ -56,16 +55,6 @@ public class AbstractOffer extends AbstractPersistable<Long>  {
 		this.picPaths = picPaths;
 	}
 
-//	public List<Premise<OFFER>> getPremises() {
-//		return premises;
-//
-//	}
-//
-//	public void setPremises(List<Premise<OFFER>> premises) {
-//		this.premises = premises;
-//		for (Premise<OFFER> premise : this.premises)
-//			premise.setOffer(this);
-//	}
 
 
 	public String getDescription() {

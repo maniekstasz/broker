@@ -21,8 +21,6 @@
 		<security:http-basic entry-point-ref="customAuthenticationEntryPoint"/>
 		
 <security:intercept-url pattern="/api/users" method="POST" access="permitAll()" requires-channel="https"/>
-<!-- 		<security:intercept-url pattern="/app/**" method="GET" access="permitAll()" requires-channel="https"/> -->
-<!-- 		<security:intercept-url pattern="/resources/**" method="GET" access="permitAll()" requires-channel="https"/> -->
 		<security:intercept-url pattern="/" method="GET" access="permitAll()" requires-channel="https"/>
 		
 		

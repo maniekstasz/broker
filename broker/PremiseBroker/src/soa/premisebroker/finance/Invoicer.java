@@ -8,7 +8,6 @@ import soa.common.finance.Invoice;
 import soa.common.finance.Invoice.InvoicePart;
 import soa.premisebroker.model.Bill;
 
-import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;

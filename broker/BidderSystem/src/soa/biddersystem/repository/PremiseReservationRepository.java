@@ -1,16 +1,11 @@
 package soa.biddersystem.repository;
 
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-import soa.biddersystem.model.Premise;
 import soa.biddersystem.model.PremiseReservation;
-import soa.common.model.AbstractReservation.ReservationStatus;
 
 public interface PremiseReservationRepository extends
 		PagingAndSortingRepository<PremiseReservation, Long> {

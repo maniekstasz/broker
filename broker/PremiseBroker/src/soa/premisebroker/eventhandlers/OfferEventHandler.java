@@ -7,7 +7,6 @@ import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.access.AccessDeniedException;
 
-import soa.common.model.PicPath;
 import soa.common.security.LoggedUser;
 import soa.common.security.SecurityEventHandlerSupportBean;
 import soa.premisebroker.model.Bidder;
@@ -36,7 +35,6 @@ public class OfferEventHandler {
 	@HandleBeforeSave
 	@HandleBeforeDelete
 	public void authorizeChange(Offer offer) {
-		// Offer offerInDb = offerRepository.findOne(offer.getId());
 		isAuthorize();
 	}
 

@@ -8,8 +8,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 @MappedSuperclass
 public abstract class AbstractReservation<U extends AbstractUser> extends Auditable<U > {
 
@@ -40,17 +38,6 @@ public abstract class AbstractReservation<U extends AbstractUser> extends Audita
 
 	@Column(name = "bidder_notes")
 	private String bidderNotes;
-
-//	@NotNull
-//	private Double price;
-//
-//	public Double getPrice() {
-//		return price;
-//	}
-//
-//	public void setPrice(Double price) {
-//		this.price = price;
-//	}
 
 	public Date getReservedFrom() {
 		return reservedFrom;

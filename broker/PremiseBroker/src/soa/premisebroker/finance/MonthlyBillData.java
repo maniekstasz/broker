@@ -2,8 +2,6 @@ package soa.premisebroker.finance;
 
 import java.math.BigInteger;
 
-import javax.persistence.Transient;
-
 public class MonthlyBillData {
 	private Long bidderId;
 	private String email;

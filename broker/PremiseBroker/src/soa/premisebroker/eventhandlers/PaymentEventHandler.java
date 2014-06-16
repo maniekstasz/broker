@@ -2,8 +2,6 @@ package soa.premisebroker.eventhandlers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
-import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
-
 import soa.premisebroker.model.Bidder;
 import soa.premisebroker.model.Bill;
 import soa.premisebroker.model.Bill.BillStatus;
